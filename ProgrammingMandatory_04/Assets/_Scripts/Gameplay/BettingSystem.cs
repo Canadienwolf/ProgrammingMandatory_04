@@ -53,6 +53,11 @@ public class BettingSystem : MonoBehaviour
         currentCash = currentCash + winAmout;
     }
 
+    public void addMoney()
+    {
+        cashAmount += 5;
+    }
+
     public void iLose()
     {
         
