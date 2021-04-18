@@ -13,70 +13,61 @@ public class BettingSystem : MonoBehaviour
     public Text CashAmountText;
     public Text betValueText;
     public GameObject notEnoughMoneyText;
+    private int betAmount;
+    private int currentCash;
+
+    //-----Numbers from Sindre-----
+    public int poolValue;
 
     //public Text betAmount;
 
     private void Awake()
     {
-        if (PlayerPrefs.HasKey("CashAmount"))
-        {
-            getValues();
-        }
-        else
+        if (startingCash == 0)
         {
             startingCash = 5;
             cashAmount = startingCash;
-            setValues();
         }
         CashAmountText.text = cashAmount.ToString();
     }
 
-    public void getValues()
-    {
-        cashAmount = PlayerPrefs.GetInt("CashAmount");
-    }
-    
-    public void setValues()
-    {
-        PlayerPrefs.SetInt("CashAmount", cashAmount);
-    }
-
     public void betNow()
     {
-        
-        //int betAmount = Convert.ToInt32(betValueText);
-        //int.Parse(betValueText, System.Globalization.NumberStyles.Integer);
-        //int betAmount = Convert.ToInt32(betValueText);
-        //int betAmount = int.TryParse(betValueText);
-        //betValueText.text = Convert.ToInt32(betAmount);
-        //int.TryParse(betAmount);
-        //betValueText.ToString();
-        //int betAmount = int.Parse(betValueText);
-        //System.Convert.ToInt32(betValueText, betAmount);
 
-        int betAmount = int.Parse(betValueText.text);
-        int currentCash = int.Parse(CashAmountText.text);
+        betAmount = int.Parse(betValueText.text);
+        currentCash = int.Parse(CashAmountText.text);
 
         if (betAmount < currentCash)
         {
             currentCash = currentCash - betAmount;
             CashAmountText.text = currentCash.ToString();
-            PlayerPrefs.SetInt("CashAmount", currentCash);
         }
         else
         {
             notEnoughMoneyText.SetActive(true);
         }
-        
-        print(PlayerPrefs.GetInt("CashAmount"));
-        
-        //currentamountcash
+    }
+    
+    public void iWin(int winAmout)
+    {
+        currentCash = currentCash + winAmout;
     }
 
-    private void Update()
+    public void iLose()
     {
-        //print(PlayerPrefs.GetInt("CashAmount"));
         
     }
 }
     
+
+
+
+//int betAmount = Convert.ToInt32(betValueText);
+//int.Parse(betValueText, System.Globalization.NumberStyles.Integer);
+//int betAmount = Convert.ToInt32(betValueText);
+//int betAmount = int.TryParse(betValueText);
+//betValueText.text = Convert.ToInt32(betAmount);
+//int.TryParse(betAmount);
+//betValueText.ToString();
+//int betAmount = int.Parse(betValueText);
+//System.Convert.ToInt32(betValueText, betAmount);
