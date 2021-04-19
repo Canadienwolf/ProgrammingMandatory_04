@@ -25,7 +25,7 @@ public class DuelCardCover : MonoBehaviour
         if (transform.parent.GetChild(0).name == dgc.chosenCard)
         {
             dgc.CorrectCard();
-            
+            stayRevealed = true;
         }
     }
     
@@ -37,12 +37,14 @@ public class DuelCardCover : MonoBehaviour
             revealTime -= Time.deltaTime;
             GetComponent<Image>().enabled = false;
 
-            if (revealTime <= 0f)
+            if (!stayRevealed)
             {
-                
-                GetComponent<Image>().enabled = true;
-                revealTime = 1f;
-                isRevealed = false;
+                if (revealTime <= 0f)
+                {
+                    GetComponent<Image>().enabled = true;
+                    revealTime = 1f;
+                    isRevealed = false;
+                }
             }
         }
     }
