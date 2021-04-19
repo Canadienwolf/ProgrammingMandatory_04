@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class RandomMovementsScript : MonoBehaviour
@@ -8,6 +9,7 @@ public class RandomMovementsScript : MonoBehaviour
     public GameObject[] cards;
 
     public GameObject winningText;
+    public GameObject turnButton;
 
     private string[] winString = { "Spade", "Heart", "Diamond", "Clover" };
     // Start is called before the first frame update
@@ -27,7 +29,12 @@ public class RandomMovementsScript : MonoBehaviour
         {
             winningText.GetComponent<Text>().text = winString[i].ToString();
             winningText.SetActive(true);
-            
+            turnButton.SetActive(false);
         }
+    }
+
+    public void Back()
+    {
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
 }

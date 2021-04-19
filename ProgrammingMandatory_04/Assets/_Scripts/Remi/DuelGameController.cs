@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -68,5 +69,10 @@ public class DuelGameController : MonoBehaviour
     public void CorrectCard()
     {
         statusText.text = "You won the duel \nby finding the card: \n" + chosenCard;
+    }
+
+    public void Back()
+    {
+        SceneManager.LoadScene(2, LoadSceneMode.Single);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using Mirror;
 using UnityEngine.UI;
 
-public class PlayersConnectedScreen : NetworkBehaviour
+public class PlayersConnectedScreen : MonoBehaviour
 {
     public Text localIpTxt;
     public Button startBtn;
@@ -20,6 +20,11 @@ public class PlayersConnectedScreen : NetworkBehaviour
 
     void Start()
     {
+        Invoke("LateStart", .1f);
+    }
+
+    void LateStart()
+    {
         manager = NetworkManager.singleton;
         if (!manager)
         {
@@ -27,7 +32,7 @@ public class PlayersConnectedScreen : NetworkBehaviour
             return;
         }
 
-        if (isServer)
+        if (InGameNetworkHandler.IsServer)
         {
             localIpTxt.text = $"IP\n{localIpAddress}";
         }

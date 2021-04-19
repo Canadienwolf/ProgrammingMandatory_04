@@ -7,21 +7,25 @@ using UnityEngine.UI;
 
 public class BettingSystem : MonoBehaviour
 {
+    public event Action<int> onResult;
+
     private int startingCash;
     
-    public int cashAmount;
+    public static int cashAmount;
     public Text CashAmountText;
-    public Text betValueText;
+    public InputField betValueInput;
     public GameObject notEnoughMoneyText;
     private int betAmount;
     private int currentCash;
+    public GameObject outcomeObject;
 
     //-----Numbers from Sindre-----
     public int poolValue;
+    public int betIndex = 0;
 
     //public Text betAmount;
 
-    private void Awake()
+    private void OnEnable()
     {
         if (startingCash == 0)
         {
@@ -31,36 +35,49 @@ public class BettingSystem : MonoBehaviour
         CashAmountText.text = cashAmount.ToString();
     }
 
-    public void betNow()
+    public void betNow(int _betIndex)
     {
+        if (betValueInput.text == string.Empty) return;
 
-        betAmount = int.Parse(betValueText.text);
+        betIndex = _betIndex;
+        betAmount = int.Parse(betValueInput.text);
         currentCash = int.Parse(CashAmountText.text);
 
-        if (betAmount < currentCash)
+        if (betAmount <= currentCash)
         {
             currentCash = currentCash - betAmount;
             CashAmountText.text = currentCash.ToString();
+            FindObjectOfType<InGameNetworkHandler>().handler.ClientAddBet(betAmount);
+
+            outcomeObject.SetActive(true);
+            gameObject.SetActive(false);
         }
         else
         {
             notEnoughMoneyText.SetActive(true);
         }
     }
+
+    public void CheckWin(int winIndex)
+    {
+        onResult?.Invoke(winIndex);
+        if(winIndex == betIndex)
+        {
+            iWin(poolValue);
+        }
+
+        poolValue = 0;
+    }
     
     public void iWin(int winAmout)
     {
         currentCash = currentCash + winAmout;
+        EnterUserName.userScore += winAmout;
     }
 
-    public void addMoney()
+    public static void addMoney()
     {
         cashAmount += 5;
-    }
-
-    public void iLose()
-    {
-        
     }
 }
     

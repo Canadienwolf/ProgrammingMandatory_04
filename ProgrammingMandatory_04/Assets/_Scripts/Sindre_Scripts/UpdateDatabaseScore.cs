@@ -5,7 +5,6 @@ using UnityEngine.Networking;
 
 public class UpdateDatabaseScore : MonoBehaviour
 {
-    public int scoreAmount = 0;
     public string loginUri = "https://hera.nord.no/~329266/SPO3021/M04_Database/updatescore.php";
 
     public void RunRequest() => StartCoroutine(RequestUpdateScore());
@@ -14,7 +13,7 @@ public class UpdateDatabaseScore : MonoBehaviour
     {
         WWWForm _form = new WWWForm();
         _form.AddField("userId", EnterUserName.userId.ToString());
-        _form.AddField("userScore", scoreAmount.ToString());
+        _form.AddField("userScore", EnterUserName.userScore.ToString());
 
         using (UnityWebRequest _webRequest = UnityWebRequest.Post(loginUri, _form))
         {
@@ -23,7 +22,6 @@ public class UpdateDatabaseScore : MonoBehaviour
             if (_webRequest.result == UnityWebRequest.Result.Success)
             {
                 Debug.Log("Upload success!");
-                EnterUserName.userScore = scoreAmount;
             }
             else
             {
