@@ -39,7 +39,7 @@ public class DuelGameController : MonoBehaviour
         if (canDoTimer)
         {
             memorizeTime -= Time.deltaTime;
-            statusText.text = "Seconds left to memorize: " + memorizeTime.ToString("F0");
+            statusText.text = "Memorize these cards! \n" + memorizeTime.ToString("F0") + " seconds left";
 
             if (memorizeTime <= 0)
             {
@@ -67,6 +67,6 @@ public class DuelGameController : MonoBehaviour
 
     public void CorrectCard()
     {
-        statusText.text = "You won the duel \nby choosing the card: \n" + chosenCard;
+        statusText.text = "You won the duel \nby finding the card: \n" + chosenCard;
     }
 }
