@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8257850702687798215}
   - component: {fileID: 8257850702687798216}
   - component: {fileID: 7385416598371058719}
+  - component: {fileID: 149032489439409082}
   m_Layer: 5
   m_Name: Card_Cover
   m_TagString: Untagged
@@ -119,4 +120,30 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8257850702687798216}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 149032489439409082}
+        m_TargetAssemblyTypeName: DuelCardCover, Assembly-CSharp
+        m_MethodName: _RevealCard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &149032489439409082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8257850702687798218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3673f646f68880049a1dba7543b5507c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  revealTime: 2
+  isRevealed: 0

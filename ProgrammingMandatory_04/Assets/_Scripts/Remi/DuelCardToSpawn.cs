@@ -7,13 +7,10 @@ public class DuelCardToSpawn : MonoBehaviour
 {
     public GameObject CardCover;
     public GameObject[] Cards;
-
-    public GameObject dealerDeck;
     
     // Start is called before the first frame update
     void Start()
     {
-        dealerDeck.SetActive(false);
         // var cardCoverInstance = Instantiate(CardCover, transform.position, transform.rotation);
         // cardCoverInstance.transform.SetParent(transform, false);
     }
@@ -22,11 +19,7 @@ public class DuelCardToSpawn : MonoBehaviour
     {
         var cardRevealInstance = Instantiate (Cards[Random.Range(0,Cards.Length)], transform.position, transform.rotation);
         cardRevealInstance.transform.SetParent(transform, false);
-        
-        var cardRevealDealerInstance = Instantiate(cardRevealInstance, new Vector3(0, -350, 0), transform.rotation);
-        cardRevealDealerInstance.transform.SetParent(dealerDeck.transform, false);
-        cardRevealDealerInstance.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        cardRevealDealerInstance.GetComponent<Button>().onClick.AddListener(this.ButtonClicked);
+        cardRevealInstance.name = cardRevealInstance.name.Replace("(Clone)", "");
     }
     public void ButtonClicked() 
     {
@@ -44,8 +37,6 @@ public class DuelCardToSpawn : MonoBehaviour
         
         var cardCoverInstance = Instantiate(CardCover, transform.position, transform.rotation);
         cardCoverInstance.transform.SetParent(transform, false);
-        
-        dealerDeck.SetActive(true);
     }
 
     // Update is called once per frame

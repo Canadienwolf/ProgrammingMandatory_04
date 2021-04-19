@@ -9,25 +9,17 @@ public class DuelGameController : MonoBehaviour
 {
     public Text statusText;
 
-    public float memorizeTime = 5f;
+    private float memorizeTime = 5f;
     public bool canDoTimer;
+
 
     private void Start()
     {
         statusText.text = "";
     }
-    
-    public string[] GetDuelerChildrenNames(Transform trans)
-    {
-        List<string> _returnValue = new List<string>();
 
-        foreach (Transform item in trans)
-        {
-            _returnValue.Add(item.gameObject.name);
-        }
-
-        return _returnValue.ToArray();
-    }
+    public List<GameObject> getListOfRevealedCards = new List<GameObject>(); 
+    public string chosenCard;
 
     public void _StartCountdown()
     {
@@ -59,18 +51,22 @@ public class DuelGameController : MonoBehaviour
                 transform.Find("Placeholder (3)").GetComponent<DuelCardToSpawn>().HideCardCollection();
                 transform.Find("Placeholder (4)").GetComponent<DuelCardToSpawn>().HideCardCollection();
                 transform.Find("Placeholder (5)").GetComponent<DuelCardToSpawn>().HideCardCollection();
-                
-                statusText.text = "Dealer is choosing a card...";
-                
-                int childIndex = Random.Range(0, GameObject.Find("DealerDeck").gameObject.transform.childCount);
-                
-                print(childIndex);
 
-                // var randomDealIndex = Random.Range(0, GameObject.Find("DealerDeck").gameObject.transform.name.childCount);
-                // randomDealIndex =
-                //     PlayerPrefs.SetString("PrefsDealersChoice", transform.GetChild(0).name.Replace("(Clone)", ""));
+                getListOfRevealedCards.Add( transform.Find("Placeholder (1)").GetChild(0).gameObject);
+                getListOfRevealedCards.Add( transform.Find("Placeholder (2)").GetChild(0).gameObject);
+                getListOfRevealedCards.Add( transform.Find("Placeholder (3)").GetChild(0).gameObject);
+                getListOfRevealedCards.Add( transform.Find("Placeholder (4)").GetChild(0).gameObject);
+                getListOfRevealedCards.Add( transform.Find("Placeholder (5)").GetChild(0).gameObject);
+                
+                
+                chosenCard = getListOfRevealedCards[Random.Range(0, getListOfRevealedCards.Count)].gameObject.name;
+                statusText.text = "Find the card: \n" + chosenCard;
             }
         }
-        
+    }
+
+    public void CorrectCard()
+    {
+        statusText.text = "You won the duel \nby choosing the card: \n" + chosenCard;
     }
 }
