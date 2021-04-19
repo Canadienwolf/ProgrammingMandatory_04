@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Sindre_Scenes/Sindre_OfflineScene.unity
+    guid: 5a87042f9e6fbac499a495a6c6e2dfc0
+  - enabled: 1
+    path: Assets/Scenes/Sindre_Scenes/Sindre_OnlineScene.unity
+    guid: 6712440cbfd1b634fa20033c9a539e76
   m_configObjects: {}
